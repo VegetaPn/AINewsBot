@@ -26,6 +26,8 @@ class ContentTranslationAgent:
             * Few-shot -> 少样本
             * AI Agent -> AI 智能体
             * AGI -> 通用人工智能
+            * Token -> Token
+            * Stability.ai -> Stability.ai
         策略：
         分三步进行翻译工作，并打印每步的结果：
         1. 根据英文内容直译，保持原有格式，不要遗漏任何信息。
