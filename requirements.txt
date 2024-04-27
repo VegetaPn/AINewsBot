@@ -1,0 +1,7 @@
+langchain
+langchain-openai
+markdownify
+python-dotenv
+beautifulsoup4
+lxml
+requests
