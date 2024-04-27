@@ -1,5 +1,7 @@
 import logging
 import datetime
+import sys
+
 from translation_agent import ContentTranslationAgent
 from file_processing_agent import HTMLCleanAgent, HTML2MarkdownAgent
 from web_browsing_agent import WebContentCheckAgent, WebContentFetchAgent
@@ -11,12 +13,16 @@ logging.basicConfig(
         filename='app.log',
         filemode='w'
     )
+logger = logging.getLogger()
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+logger.addHandler(console_handler)
 
 
 if __name__ == '__main__':
     task_id = "debug_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
     archive_url = "https://buttondown.email/ainews/archive/"
-    today = datetime.date.today() - datetime.timedelta(days=1)
+    today = datetime.date.today() - datetime.timedelta(days=2)
     today = today.strftime('%B %d, %Y')
 
     web_content_check_agent = WebContentCheckAgent(task_id, archive_url, today)

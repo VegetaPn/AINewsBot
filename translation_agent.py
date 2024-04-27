@@ -28,6 +28,7 @@ class ContentTranslationAgent:
             * AGI -> 通用人工智能
             * Token -> Token
             * Stability.ai -> Stability.ai
+            * LlaMa -> LlaMa
         策略：
         分三步进行翻译工作，并打印每步的结果：
         1. 根据英文内容直译，保持原有格式，不要遗漏任何信息。
@@ -53,7 +54,6 @@ class ContentTranslationAgent:
         ```
         
         现在请按照上面的要求从第一行开始翻译以下内容为简体中文：
-        ```
         '''
         self.translated_pattern = r'### 意译\n```(.*?)```'
 
@@ -65,7 +65,7 @@ class ContentTranslationAgent:
             logging.error(f"[Content Translate Agent] Input is None.")
             return
 
-        paragraphs = content.split("---\n")
+        paragraphs = content.split("\n\n\n")
         length = len(paragraphs)
         logging.info(f"[Content Translate Agent] content length: {length}")
 
@@ -75,14 +75,14 @@ class ContentTranslationAgent:
             logging.info(f"[Content Translate Agent] Current round: {round}")
 
             messages = [
-                SystemMessage(content=self.system_prompt),
-                HumanMessage(content=paragraph)
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": paragraph}
             ]
             logging.info(f"[Content Translate Agent] REQ: {messages}")
             ai_message = llm.chat(messages)
             logging.info(f"[Content Translate Agent] AI: {ai_message}")
 
-            translated = self.parse_message(ai_message.content)
+            translated = self.parse_message(ai_message)
             if translated is None:
                 logging.error(f"[Content Translate Agent] Translated is None.")
                 continue
