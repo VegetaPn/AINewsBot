@@ -1,0 +1,3070 @@
+<html>
+ <body>
+  <div class="email-body-content">
+   <date>
+    April 26, 2024
+   </date>
+   <h1 class="subject">
+    [AINews] Apple's OpenELM beats OLMo with 50% of its dataset, using DeLighT
+   </h1>
+   <blockquote>
+    <p>
+     This is AI News! an MVP of a service that goes thru all AI discords/Twitters/reddits and summarizes what people are talking about, so that you can keep up without the fatigue. Signing up
+     <a href="https://buttondown.email/ainews/" target="_blank">
+      here
+     </a>
+     opts you in to the real thing when we launch it 🔜
+    </p>
+   </blockquote>
+   <hr/>
+   <blockquote>
+    <p>
+     AI News for 4/24/2024-4/26/2024. We checked 7 subreddits and
+     <a href="https://twitter.com/i/lists/1585430245762441216?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       373
+      </strong>
+      Twitters
+     </a>
+     and
+     <strong>
+      27
+     </strong>
+     Discords (
+     <strong>
+      395
+     </strong>
+     channels, and
+     <strong>
+      5502
+     </strong>
+     messages) for you. Estimated reading time saved (at 200wpm):
+     <strong>
+      599 minutes
+     </strong>
+     .
+    </p>
+   </blockquote>
+   <p>
+    <a href="https://buttondown.email/ainews/archive/ainews-mm1-apples-first-large-multimodal-model/" target="_blank">
+     Apple's AI emergence
+    </a>
+    continues apace ahead of WWDC. We've covered
+    <a href="https://buttondown.email/ainews/archive/ainews-ai2-releases-olmo-the-4th-open-everything/" target="_blank">
+     OLMo
+    </a>
+    before, and it looks like OpenELM is Apple's first
+    <a href="https://arxiv.org/abs/2404.14619?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     actually open LLM
+    </a>
+    (
+    <a href="https://huggingface.co/apple/OpenELM?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     weights
+    </a>
+    ,
+    <a href="https://github.com/apple/corenet?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     code
+    </a>
+    ) release sharing some novel research in the efficient architecture direction.
+   </p>
+   <p>
+    <img alt="image.png" class="newsletter-image" src="https://assets.buttondown.email/images/3bd4b772-df2f-46b7-8318-2cc230b7eb46.png?w=960&amp;fit=max"/>
+   </p>
+   <p>
+    It's not
+    <em>
+     totally
+    </em>
+    open, but it's pretty open. As
+    <a href="https://twitter.com/rasbt/status/1783480053847736713/photo/1?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Sebastian Raschka put it
+    </a>
+    :
+   </p>
+   <blockquote>
+    <p>
+     Let's start with the most interesting tidbits:
+    </p>
+    <ul>
+     <li>
+      OpenELM comes in 4 relatively small and convenient sizes: 270M, 450M, 1.1B, and 3B
+     </li>
+     <li>
+      OpenELM performs slightly better than OLMo even though it's trained on 2x fewer tokens
+     </li>
+     <li>
+      The main architecture tweak is a layer-wise scaling strategy
+     </li>
+    </ul>
+   </blockquote>
+   <p>
+    But:
+   </p>
+   <blockquote>
+    <p>
+     "Sharing details is not the same as explaining them, which is what research papers were aimed to do when I was a graduate student. For instance, they sampled a relatively small subset of 1.8T tokens from various publicly available datasets (RefinedWeb, RedPajama, The PILE, and Dolma). This subset was 2x smaller than Dolma, which was used for training OLMo. What was the rationale for this subsampling, and what were the criteria?"
+    </p>
+   </blockquote>
+   <p>
+    <img alt="image.png" class="newsletter-image" src="https://assets.buttondown.email/images/5a0bcc71-6f46-41a3-a34b-6efff203c64d.png?w=960&amp;fit=max"/>
+   </p>
+   <p>
+    The layer-wise scaling comes from
+    <a href="https://arxiv.org/abs/2008.00623?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     DeLight
+    </a>
+    , a 2021 paper deepening the standard attention mechanism 2.5-5x in number of layers but matching 2-3x larger models by parameter count. These seem paradoxical but the authors described the main trick of varying the depth between the input and the output, rather than uniform:
+   </p>
+   <p>
+    <img alt="image.png" class="newsletter-image" src="https://assets.buttondown.email/images/64a3ecf6-fbca-4816-9233-f4100454aca8.png?w=960&amp;fit=max"/>
+   </p>
+   <p>
+    <img alt="image.png" class="newsletter-image" src="https://assets.buttondown.email/images/a70b5ba1-00bb-482d-a4a4-f1027eec0266.png?w=960&amp;fit=max"/>
+   </p>
+   <hr/>
+   <p>
+    <strong>
+     Table of Contents
+    </strong>
+   </p>
+   <div class="toc">
+    <ul>
+     <li>
+      <a href="#ai-reddit-recap">
+       AI Reddit Recap
+      </a>
+     </li>
+     <li>
+      <a href="#ai-twitter-recap">
+       AI Twitter Recap
+      </a>
+     </li>
+     <li>
+      <a href="#ai-discord-recap">
+       AI Discord Recap
+      </a>
+     </li>
+     <li>
+      <a href="#part-1-high-level-discord-summaries">
+       PART 1: High level Discord summaries
+      </a>
+      <ul>
+       <li>
+        <a href="#unsloth-ai-daniel-han-discord">
+         Unsloth AI (Daniel Han) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#perplexity-ai-discord">
+         Perplexity AI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#cuda-mode-discord">
+         CUDA MODE Discord
+        </a>
+       </li>
+       <li>
+        <a href="#lm-studio-discord">
+         LM Studio Discord
+        </a>
+       </li>
+       <li>
+        <a href="#nous-research-ai-discord">
+         Nous Research AI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#openai-discord">
+         OpenAI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#stabilityai-stable-diffusion-discord">
+         Stability.ai (Stable Diffusion) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#huggingface-discord">
+         HuggingFace Discord
+        </a>
+       </li>
+       <li>
+        <a href="#eleuther-discord">
+         Eleuther Discord
+        </a>
+       </li>
+       <li>
+        <a href="#openrouter-alex-atallah-discord">
+         OpenRouter (Alex Atallah) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#llamaindex-discord">
+         LlamaIndex Discord
+        </a>
+       </li>
+       <li>
+        <a href="#laion-discord">
+         LAION Discord
+        </a>
+       </li>
+       <li>
+        <a href="#openinterpreter-discord">
+         OpenInterpreter Discord
+        </a>
+       </li>
+       <li>
+        <a href="#openaccess-ai-collective-axolotl-discord">
+         OpenAccess AI Collective (axolotl) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#cohere-discord">
+         Cohere Discord
+        </a>
+       </li>
+       <li>
+        <a href="#tinygrad-george-hotz-discord">
+         tinygrad (George Hotz) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#modular-mojo-discord">
+         Modular (Mojo 🔥) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#langchain-ai-discord">
+         LangChain AI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#latent-space-discord">
+         Latent Space Discord
+        </a>
+       </li>
+       <li>
+        <a href="#mozilla-ai-discord">
+         Mozilla AI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#discoresearch-discord">
+         DiscoResearch Discord
+        </a>
+       </li>
+       <li>
+        <a href="#interconnects-nathan-lambert-discord">
+         Interconnects (Nathan Lambert) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#skunkworks-ai-discord">
+         Skunkworks AI Discord
+        </a>
+       </li>
+       <li>
+        <a href="#datasette-llm-simonw-discord">
+         Datasette - LLM (@SimonW) Discord
+        </a>
+       </li>
+       <li>
+        <a href="#alignment-lab-ai-discord">
+         Alignment Lab AI Discord
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="#part-2-detailed-by-channel-summaries-and-links">
+       PART 2: Detailed by-Channel summaries and links
+      </a>
+     </li>
+    </ul>
+   </div>
+   <hr/>
+   <h1 id="ai-reddit-recap">
+    AI Reddit Recap
+   </h1>
+   <blockquote>
+    <p>
+     Across r/LocalLlama, r/machinelearning, r/openai, r/stablediffusion, r/ArtificialInteligence, /r/LLMDevs, /r/Singularity. Comment crawling works now but has lots to improve!
+    </p>
+   </blockquote>
+   <p>
+    <strong>
+     LLaMA Developments
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      LLaMA 3 increases context to 160K+ tokens
+     </strong>
+     : In /r/LocalLLaMA, LLaMA 3 increases context length to
+     <a href="https://www.reddit.com/r/LocalLLaMA/comments/1ccqmjz/llama_3_now_with_160k_context/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       over 160K tokens while maintaining perfect recall
+      </strong>
+     </a>
+     . Commenters note this is impressive but will require significant consumer hardware to run locally at good speeds. Meta's Llama 3 has been downloaded over 1.2M times, with over 600 derivative models on Hugging Face.
+    </li>
+    <li>
+     <strong>
+      First LLama-3 8B-Instruct model with 262K context released
+     </strong>
+     : In /r/LocalLLaMA, the first LLama-3 8B-Instruct model with
+     <a href="https://www.reddit.com/r/LocalLLaMA/comments/1cd4yim/llama38binstruct_with_a_262k_context_length/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       over 262K context length is released on Hugging Face
+      </strong>
+     </a>
+     , enabling advanced reasoning beyond simple prompts.
+    </li>
+    <li>
+     <strong>
+      Llama 3 70B outperforms 8B model
+     </strong>
+     : In /r/LocalLLaMA, comparisons show the
+     <a href="https://www.reddit.com/r/LocalLLaMA/comments/1cda0fv/llama_3_8b_f16_vs_llama_3_70b_q2/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       quantized Llama 3 70B IQ2_XS outperforms the uncompressed Llama 3 8B f16 model
+      </strong>
+     </a>
+     . The 70B IQ3_XS version is found to be best for 32GB VRAM users.
+    </li>
+    <li>
+     <strong>
+      New paper compares AI alignment approaches
+     </strong>
+     : In /r/LocalLLaMA, a new paper compares DPO to other alignment approaches, finding
+     <a href="https://www.reddit.com/r/LocalLLaMA/comments/1ccz84a/insights_into_alignment_dpo_and_its_variants/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       KTO performs best on most benchmarks and alignment methods are sensitive to training data volume
+      </strong>
+     </a>
+     .
+    </li>
+   </ul>
+   <p>
+    <strong>
+     AI Ethics &amp; Regulation
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Eric Schmidt warns about risks of open-source AI
+     </strong>
+     : In /r/singularity, former Google CEO Eric Schmidt cautions that
+     <a href="https://www.reddit.com/r/singularity/comments/1ccyqkr/former_google_ceo_eric_schmidt_warns_that_open/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       open-source AI models give risky capabilities to bad actors and China
+      </strong>
+     </a>
+     . Many see this as an attempt by large tech companies to stifle competition, noting China likely has the capability to develop powerful models without relying on open-source.
+    </li>
+    <li>
+     <strong>
+      U.S. proposal aims to end anonymous cloud usage
+     </strong>
+     : In /r/singularity, a
+     <a href="https://www.reddit.com/r/singularity/comments/1ccr2ub/us_know_your_customer_proposal_will_put_an_end_to/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       U.S. proposal seeks to implement "Know Your Customer" requirements to end anonymous cloud usage
+      </strong>
+     </a>
+     .
+    </li>
+    <li>
+     <strong>
+      Baltimore coach allegedly used AI for defamation
+     </strong>
+     : In /r/OpenAI, a Baltimore coach allegedly
+     <a href="https://www.reddit.com/r/OpenAI/comments/1cd5h9c/baltimore_high_school_athletic_director_used_ai/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       used AI voice cloning to attempt to get a high school principal fired by generating fake racist audio
+      </strong>
+     </a>
+     .
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Hardware Developments
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      TSMC unveils 1.6nm process node
+     </strong>
+     : In /r/singularity, TSMC announces a
+     <a href="https://www.reddit.com/r/singularity/comments/1ccr4hy/tsmc_unveils_16nm_process_technology_with/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       1.6nm process node with backside power delivery
+      </strong>
+     </a>
+     , enabling continued exponential hardware progress over the next few years.
+    </li>
+    <li>
+     <strong>
+      Ultra-thin solar cells enable self-charging drones
+     </strong>
+     : In /r/singularity, German researchers develop
+     <a href="https://www.reddit.com/r/singularity/comments/1ccr6aq/german_researchers_have_developed_a_solar_cell/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       ultra-thin, flexible solar cells that allow small drones to self-charge during operation
+      </strong>
+     </a>
+     .
+    </li>
+    <li>
+     <strong>
+      Micron secures $6.1B in CHIPS Act funding
+     </strong>
+     : In /r/singularity, Micron secures
+     <a href="https://www.reddit.com/r/singularity/comments/1cd0s5k/micron_set_to_receive_61b_in_chips_act_funding_to/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       $6.1 billion in CHIPS Act funding to build semiconductor manufacturing facilities in New York and Idaho
+      </strong>
+     </a>
+     .
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Memes &amp; Humor
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      AI assistant confidently asserts flat Earth
+     </strong>
+     : In /r/singularity, a humorous image depicts an
+     <a href="https://www.reddit.com/r/singularity/comments/1ccqhzv/chat_is_this_real/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      <strong>
+       AI assistant confidently asserting that the Earth is flat
+      </strong>
+     </a>
+     , sparking jokes about needing AI capable of believing absurdities or that humanity has its best interests at heart.
+    </li>
+   </ul>
+   <hr/>
+   <h1 id="ai-twitter-recap">
+    AI Twitter Recap
+   </h1>
+   <blockquote>
+    <p>
+     all recaps done by Claude 3 Opus, best of 4 runs. We are working on clustering and flow engineering with Haiku.
+    </p>
+   </blockquote>
+   <p>
+    Here is a summary of the key topics and insights from the provided tweets:
+   </p>
+   <p>
+    <strong>
+     Meta Llama 3 Release and Impact
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Rapid Adoption
+     </strong>
+     : In the week since release, Llama 3 models have been downloaded over 1.2M times with 600+ derivative models on Hugging Face, showing exciting early impact. (
+     <a href="https://twitter.com/AIatMeta/status/1783602908845748685?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @AIatMeta
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Training Optimizations
+     </strong>
+     : Meta is moving fast on optimizations, with Llama 3 70B training 18% faster and Llama 3 8B training 20% faster. (
+     <a href="https://twitter.com/svpino/status/1783888989025431933?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @svpino
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Context Extension
+     </strong>
+     : The community extended Llama 3 8B's context from 8k to nearly 100k tokens by combining PoSE, continued pre-training, and RoPE scaling. (
+     <a href="https://twitter.com/winglian/status/1783842736833016289?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @winglian
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Inference Acceleration
+     </strong>
+     : Colossal-Inference now supports Llama 3 inference acceleration, enhancing efficiency by ~20% for 8B and 70B models. (
+     <a href="https://twitter.com/omarsar0/status/1783895931043111088?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @omarsar0
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Benchmark Performance
+     </strong>
+     : Llama 3 70B is tied for 1st place for English queries on the LMSYS leaderboard. (
+     <a href="https://twitter.com/rohanpaul_ai/status/1783570318230978783?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @rohanpaul_ai
+     </a>
+     )
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Phi-3 Model Release and Reception
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Overfitting Benchmarks
+     </strong>
+     : Some argue Phi-3 overfits public benchmarks but underperforms in practical usage compared to models like Llama-3 8B. (
+     <a href="https://twitter.com/svpino/status/1783556635543339310?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @svpino
+     </a>
+     ,
+     <a href="https://twitter.com/abacaj/status/1783898711623352686?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @abacaj
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Unexpected Behavior
+     </strong>
+     : As a fundamentally different model, Phi-3 can exhibit surprising results, both good and bad. (
+     <a href="https://twitter.com/SebastienBubeck/status/1783885843943616524?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @srush_nlp
+     </a>
+     )
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Extending LLM Context Windows
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      PoSE Technique
+     </strong>
+     : The Positional Skip-wisE (PoSE) method simulates long inputs during training to increase context length, powering Llama 3's extension to 128k tokens. (
+     <a href="https://twitter.com/rohanpaul_ai/status/1783574428858696161?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @rohanpaul_ai
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Axolotl and Gradient AI
+     </strong>
+     : Tools like Axolotl and approaches from Gradient AI are enabling context extension for Llama and other models to 160k+ tokens. (
+     <a href="https://twitter.com/winglian/status/1783469196011016696?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @winglian
+     </a>
+     ,
+     <a href="https://twitter.com/rohanpaul_ai/status/1783736130321408011?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @rohanpaul_ai
+     </a>
+     )
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Cohere Toolkit Release
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Enterprise Focus
+     </strong>
+     : Cohere released a toolkit to accelerate LLM deployment in enterprises, targeting secure RAG with private data and local code interpreters. (
+     <a href="https://twitter.com/aidangomez/status/1783533461401227563?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @aidangomez
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Flexible Deployment
+     </strong>
+     : The toolkit's components can be deployed to any cloud and reused to build applications. (
+     <a href="https://twitter.com/aidangomez/status/1783533465960378561?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @aidangomez
+     </a>
+     ,
+     <a href="https://twitter.com/aidangomez/status/1783533471777935433?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @aidangomez
+     </a>
+     )
+    </li>
+   </ul>
+   <p>
+    <strong>
+     OpenAI Employee Suspension and GPT-5 Speculation
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <strong>
+      Sentience Claims
+     </strong>
+     : An OpenAI employee who claimed GPT-5 is sentient has been suspended from Twitter. (
+     <a href="https://twitter.com/bindureddy/status/1783847600824995850?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @bindureddy
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Hype Generation
+     </strong>
+     : OpenAI is seen as a hype-creation engine around AGI and AI sentience claims, even as competitors match GPT-4 at lower costs. (
+     <a href="https://twitter.com/bindureddy/status/1783852748636905716?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @bindureddy
+     </a>
+     )
+    </li>
+    <li>
+     <strong>
+      Agent Capabilities
+     </strong>
+     : Some believe GPT-5 will be an "agent GPT" based on the performance boost from agent infrastructure on top of language models. (
+     <a href="https://twitter.com/OfirPress/status/1783870394581074110?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @OfirPress
+     </a>
+     )
+    </li>
+   </ul>
+   <p>
+    <strong>
+     Other Noteworthy Topics
+    </strong>
+   </p>
+   <ul>
+    <li>
+     Concerns about the AI summit board's lack of diverse representation to address power concentration risks. (
+     <a href="https://twitter.com/ClementDelangue/status/1783882237764633052?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @ClementDelangue
+     </a>
+     )
+    </li>
+    <li>
+     OpenAI and Moderna's partnership as a positive sign of traditional businesses adopting generative AI. (
+     <a href="https://twitter.com/gdb/status/1783529202974687527?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @gdb
+     </a>
+     ,
+     <a href="https://twitter.com/rohanpaul_ai/status/1783533728846827681?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @rohanpaul_ai
+     </a>
+     )
+    </li>
+    <li>
+     Apple's open-sourced on-device language models showing poor performance but providing useful architecture and training details. (
+     <a href="https://twitter.com/bindureddy/status/1783635037365436462?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @bindureddy
+     </a>
+     ,
+     <a href="https://twitter.com/rasbt/status/1783480053847736713?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      @rasbt
+     </a>
+     )
+    </li>
+   </ul>
+   <hr/>
+   <h1 id="ai-discord-recap">
+    AI Discord Recap
+   </h1>
+   <blockquote>
+    <p>
+     A summary of Summaries of Summaries
+    </p>
+   </blockquote>
+   <ol>
+    <li>
+     <p>
+      <strong>
+       Extending LLM Context Lengths
+      </strong>
+     </p>
+     <ul>
+      <li>
+       <strong>
+        Llama 3 Performance and Context Length Innovations
+       </strong>
+       : Discussions centered around
+       <strong>
+        Llama 3's capabilities
+       </strong>
+       , with some expressing mixed opinions on its code recall and configuration compared to
+       <strong>
+        GPT-4
+       </strong>
+       . However, innovations in extending Llama 3's
+       <strong>
+        context length to 96k tokens for the 8B model
+       </strong>
+       using techniques like
+       <strong>
+        PoSE (Positional Skip-wisE)
+       </strong>
+       and continued pre-training with 300M tokens generated excitement, as detailed in this
+       <a href="https://x.com/winglian/status/1783456379199484367?s=46&amp;t=stOPrwZiN_fxSK0RuC8Flg&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        tweet thread
+       </a>
+       .
+      </li>
+      <li>
+       The
+       <a href="https://github.com/jzhang38/EasyContext?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        EasyContext project
+       </a>
+       aims to extrapolate LLM context lengths to
+       <strong>
+        1 million tokens
+       </strong>
+       with minimal hardware requirements.
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      <strong>
+       Optimizing LLM Training and Deployment
+      </strong>
+     </p>
+     <ul>
+      <li>
+       <a href="https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#introduction" target="_blank">
+        Nvidia's Nsight Compute CLI
+       </a>
+       is utilized for
+       <strong>
+        kernel profiling
+       </strong>
+       to optimize CUDA code for LLM training.
+      </li>
+      <li>
+       <strong>
+        Finetuning LLMs for Domain-Specific Gains
+       </strong>
+       : Interest grew in
+       <strong>
+        finetuning large language models
+       </strong>
+       for domain-specific improvements, with examples like
+       <strong>
+        <a href="https://arxiv.org/abs/2311.16079?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+         Meditron
+        </a>
+       </strong>
+       for medical applications. Discussions also covered
+       <strong>
+        data synthesis
+       </strong>
+       strategies using tools like
+       <strong>
+        <a href="https://github.com/argilla-io/distilabel?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+         Argilla's Distilabel
+        </a>
+       </strong>
+       , and the challenges of multi-document, long-context finetuning. Cost-performance tradeoffs were debated, such as spending
+       <a href="https://discord.com/channels/1053877538025386074/1154120232051408927/1232958591955112028?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        $2,368 for 4 epochs vs $41,440 for 50 epochs
+       </a>
+       with potentially minor gains.
+      </li>
+      <li>
+       PyTorch introduces
+       <a href="https://github.com/pytorch/torchtitan?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        Torchtitan
+       </a>
+       , a library dedicated to aiding LLM training from scratch.
+      </li>
+      <li>
+       The
+       <a href="https://paper-club.ivanleo.com/papers/mixture-of-depths?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        Mixture of Depths paper
+       </a>
+       proposes accelerating transformer training using a modified MoE routing mechanism.
+      </li>
+      <li>
+       <strong>
+        CUDA Optimization Deep Dives
+       </strong>
+       : CUDA developers dug into kernel profiling with tools like
+       <strong>
+        <a href="https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#introduction" target="_blank">
+         NVIDIA Nsight Compute CLI
+        </a>
+       </strong>
+       , discussed
+       <strong>
+        memory coalescing
+       </strong>
+       and
+       <strong>
+        burst sizes
+       </strong>
+       around 128 bytes, and debated the efficiency of
+       <strong>
+        low-bit quantization
+       </strong>
+       methods. Conversations also covered
+       <strong>
+        flash attention compatibility
+       </strong>
+       issues with PyTorch 2.3.0, and the implications of PyTorch AO supporting
+       <strong>
+        custom CUDA extensions
+       </strong>
+       for performance tuning.
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      <strong>
+       Open-Source LLM Ecosystem Expansion
+      </strong>
+     </p>
+     <ul>
+      <li>
+       <strong>
+        Apple's Surprise Entry into Open-Source Models
+       </strong>
+       :
+       <strong>
+        Apple's release of
+        <a href="https://huggingface.co/apple/OpenELM?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+         OpenELM
+        </a>
+       </strong>
+       , a family of efficient open-source language models ranging from 270M to 3B parameters, caught the AI community by surprise. The move marked a shift from Apple's traditionally proprietary approach, with the 270M model quickly gaining attention on Hugging Face.
+      </li>
+      <li>
+       <a href="https://huggingface.co/BioMistral/BioMistral-7B?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        BioMistral
+       </a>
+       is introduced, leveraging Mistral for pretrained medical LLMs.
+      </li>
+      <li>
+       Mozilla's
+       <a href="https://hacks.mozilla.org/2024/04/llamafiles-progress-four-months-in/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        llamafile project
+       </a>
+       enables distributing and running LLMs locally with high performance.
+      </li>
+      <li>
+       Dify emerges as an
+       <a href="https://github.com/langgenius/dify?tab=readme-ov-file&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        open-source LLM app development platform
+       </a>
+       combining AI workflows and model management.
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      <strong>
+       Evaluating and Benchmarking LLMs
+      </strong>
+     </p>
+     <ul>
+      <li>
+       On the
+       <a href="https://eqbench.com/judgemark.html?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        Judgemark benchmark
+       </a>
+       ,
+       <strong>
+        Llama-3-70b
+       </strong>
+       shows promise for fine-tuning
+       <strong>
+        disco-judge
+       </strong>
+       applications.
+      </li>
+      <li>
+       Discussions around the effectiveness of
+       <strong>
+        validation loss
+       </strong>
+       as a performance indicator for LLMs.
+      </li>
+      <li>
+       The
+       <a href="https://arxiv.org/abs/2404.11160?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+        Low-Cost Language Models survey
+       </a>
+       evaluates CPU-friendly LLMs on Python code generation tasks.
+      </li>
+      <li>
+       Debates on the transparency of
+       <strong>
+        Nightshade's
+       </strong>
+       autoencoder capabilities and the need for publishing findings openly.
+      </li>
+     </ul>
+    </li>
+   </ol>
+   <hr/>
+   <h1 id="part-1-high-level-discord-summaries">
+    PART 1: High level Discord summaries
+   </h1>
+   <h2 id="unsloth-ai-daniel-han-discord">
+    <a href="https://discord.com/channels/1179035537009545276?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Unsloth AI (Daniel Han)
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Fine-Tuning Tribulations and Triumphs
+     </strong>
+     : Engineers shared their challenges with fine-tuning models, involving 4-bit quantization, VRAM requirements exceeding 48GB, and token index sequence length errors. Solutions included batch size revision, enabling
+     <a href="https://github.com/unslothai/unsloth?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#-finetune-for-free" target="_blank">
+      pack
+     </a>
+     functionality, and considering alternative testing environments like
+     <strong>
+      Aphrodite Engine
+     </strong>
+     or
+     <strong>
+      llama.cpp
+     </strong>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Gossip or Gone?
+     </strong>
+     : Speculation is rampant about the dissolution of the
+     <strong>
+      WizardLM
+     </strong>
+     team after
+     <strong>
+      Qingfeng Sun's staff page
+     </strong>
+     redirect. Contrasting sentiments were shared, from salvaging
+     <strong>
+      WizardLM datasets
+     </strong>
+     to
+     <strong>
+      showcase
+     </strong>
+     sessions where
+     <strong>
+      Meta's LlaMA-3 models
+     </strong>
+     (including an 8B and 70B version) were cited as top performers in their classes.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      From Cold Storage to Hot Topics
+     </strong>
+     : A member proudly announced an
+     <a href="https://github.com/oKatanaaa/kolibrify?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      open-source release
+     </a>
+     of
+     <strong>
+      Kolibrify
+     </strong>
+     , a curriculum training tool for instruction-following LLMs. On a technical note, the community discussed
+     <strong>
+      Triton
+     </strong>
+     dependencies, errors with "Quantization failed," and
+     <strong>
+      gguf model
+     </strong>
+     testing strategies, reaching a consensus on best practices for
+     <strong>
+      fine-tuning
+     </strong>
+     and deployment options.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Pragmatic Pruning Progress
+     </strong>
+     : Insights were shared about a project on iterative context length increase for models using a
+     <strong>
+      <a href="https://github.com/l4b4r4b4b4/trl/tree/evol_laser_merge_trainer?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+       triton laser merge trainer
+      </a>
+     </strong>
+     that operates during evaluation. This method, signaled as innovative due to no reinitialization requirements, could provide a pathway for enhanced model usability without system overhaul.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Unsloth's Milestones and Resources
+     </strong>
+     : Unsloth AI marked a significant milestone with 500k monthly downloads of their fine-tuning framework on Hugging Face and promoted the sharing of
+     <strong>
+      exact match
+     </strong>
+     GGUF models despite potential redundancy. Emphasis was also on directing users to
+     <strong>
+      <a href="https://colab.research.google.com/drive/135ced7oHytdxu3N2DNe1Z0kqjyYIkDXp?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+       Colab notebooks
+      </a>
+     </strong>
+     for effective fine-tuning strategies.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="perplexity-ai-discord">
+    <a href="https://discord.com/channels/1047197230748151888?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Perplexity AI
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Siri Gets a Brainy Buddy
+     </strong>
+     : Perplexity AI Discord chatbot introduces an exclusive auditory feature for
+     <strong>
+      iOS users
+     </strong>
+     that reads answers to any posed question.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Opus Limit Outcry
+     </strong>
+     : Frustration arises within the community concerning the new 50-query daily limit on Claude 3 Opus interactions, while still,
+     <strong>
+      Perplexity chatbot supports Opus
+     </strong>
+     despite these caps.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      API Adoption Anxieties
+     </strong>
+     : AI Engineers are discussing integration issues with the Perplexity API, such as outdated responses and a lack of GPT-4 support; a user also sought advice on
+     <strong>
+      optimal hyperparameters
+     </strong>
+     for the
+     <code>
+      llama-3-70b-instruct
+     </code>
+     model.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      A Game of Models
+     </strong>
+     : The community is buzzing with anticipation around Google's Gemini model, and its potential impact on the AI landscape, while noting GPT-5 will have to bring exceptional innovations to keep up with the competition.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Crystal Ball for Net Neutrality
+     </strong>
+     : A linked article prompts discussions on the FCC's reestablishment of Net Neutrality, with implications for the
+     <strong>
+      AI Boom's
+     </strong>
+     future being pondered by community members.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="cuda-mode-discord">
+    <a href="https://discord.com/channels/1189498204333543425?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     CUDA MODE
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     CUDA Collective Comes Together
+    </strong>
+    : Members focused on honing their skills with
+    <strong>
+     CUDA
+    </strong>
+    through optimizing various kernels and algorithms, including matrix multiplication and flash attention. Threads spanned from leveraging the
+    <a href="https://docs.nvidia.com/nsight-compute/NsightComputeCli/index.html?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#introduction" target="_blank">
+     NVIDIA Nsight Compute CLI User Guide
+    </a>
+    for kernel profiling to debate on the efficiency of low-bit quantization methods.
+   </p>
+   <p>
+    <strong>
+     PyTorch Tangles with Compatibility and Extensions
+    </strong>
+    : A snag was hit with
+    <strong>
+     flash-attn compatibility
+    </strong>
+    in
+    <strong>
+     PyTorch 2.3.0
+    </strong>
+    , resulting in an
+    <code>
+     undefined symbol
+    </code>
+    error, which participants hoped to see rectified promptly. PyTorch AO ignited enthusiasm by
+    <a href="https://github.com/pytorch/ao/pull/135?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     supporting custom CUDA extensions
+    </a>
+    , facilitating performance tuning using
+    <code>
+     torch.compile
+    </code>
+    .
+   </p>
+   <p>
+    <strong>
+     Greener Code with C++
+    </strong>
+    : An announcement about a bonus talk from the
+    <strong>
+     NVIDIA C++ team
+    </strong>
+    on converting
+    <code>
+     llm.c
+    </code>
+    to
+    <code>
+     llm.cpp
+    </code>
+    teased opportunities for clearer, faster code.
+   </p>
+   <p>
+    <strong>
+     The Matrix of Memory and Models
+    </strong>
+    : Discussions delved deep into finer points of CUDA best practices, contemplating
+    <strong>
+     burst sizes
+    </strong>
+    for memory coalescing around
+    <strong>
+     128 bytes
+    </strong>
+    as explored in
+    <strong>
+     Chapter 6, section 3.d
+    </strong>
+    of the CUDA guide, and toying with the concept of reducing overhead in packed operations.
+   </p>
+   <p>
+    <strong>
+     Recording Rendezvous
+    </strong>
+    : Volunteers stepped up for screen recording with detailed, actionable advice and
+    <a href="https://existential.audio/blackhole/download/?code=681349920&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Existential Audio - BlackHole
+    </a>
+    for lossless sound capture, highlighting the careful nuances needed for a refined technical setup.
+   </p>
+   <hr/>
+   <h2 id="lm-studio-discord">
+    <a href="https://discord.com/channels/1110598183144399058?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     LM Studio
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      GPU Offloads to AMD OpenCL
+     </strong>
+     : A technical hiccup with
+     <strong>
+      GPU Offloading
+     </strong>
+     was resolved by switching the GPU type to
+     <strong>
+      AMD Open CL
+     </strong>
+     , demonstrating a simple fix can sidestep performance issues.
+    </li>
+    <li>
+     <strong>
+      Mixed News on Updates and Performance
+     </strong>
+     : Upgrade issues cropped up in LM Studio with
+     <strong>
+      version 0.2.21
+     </strong>
+     , causing previous setups running
+     <strong>
+      phi-3 mini models
+     </strong>
+     to malfunction, while other users are experimenting with using
+     <strong>
+      Version 2.20
+     </strong>
+     and facing GPU usage spikes without successful model loading. Users are actively troubleshooting, including submitting requests for screenshots for better diagnostics.
+    </li>
+    <li>
+     <strong>
+      LM Studio Turns Chat into Document Dynamo
+     </strong>
+     : Enthusiastic discussions around improving
+     <strong>
+      LM Studio's chat feature
+     </strong>
+     have led to embedding document retrieval using
+     <strong>
+      Retriever-Augmented Generation (RAG)
+     </strong>
+     and tweaking GPU settings for better resource utilization.
+    </li>
+    <li>
+     <strong>
+      Tackling AI with Graphical Might
+     </strong>
+     : The community is sharing insights into optimal hardware setups and potential performance boosts anticipated from Nvidia Tesla equipment when using AI models, indicating a strong interest in the best equipment for AI model hosting.
+    </li>
+    <li>
+     <strong>
+      AMD's ROCm Under the Microscope
+     </strong>
+     : The use of
+     <strong>
+      AMD's ROCm tech preview
+     </strong>
+     has shown promise with certain setups, achieving a notable 30t/s on an eGPU system, although compatibility snags underscore the importance of checking GPU support against the ROCm documentation.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="nous-research-ai-discord">
+    <a href="https://discord.com/channels/1053877538025386074?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Nous Research AI
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Pushing The Envelope on Model Context Limits
+    </strong>
+    : Llama 3 models are breaking context barriers, with one variant reaching a
+    <strong>
+     96k context for the 8B model
+    </strong>
+    using PoSE and continued pre-training with 300M tokens. The efficacy of Positional Skip-wisE (PoSE) and
+    <strong>
+     RoPE scaling
+    </strong>
+    were key topics, with a
+    <a href="https://openreview.net/forum?id=3Z1gxuAQrA&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     paper on PoSE's context window extension
+    </a>
+    and discussions on fine-tuning RoPE base during fine-tuning for lengthier contexts mentioned.
+   </p>
+   <p>
+    <strong>
+     LLM Performance and Cost Discussions Engage Community
+    </strong>
+    : Engineers expressed skepticism about validation loss as a performance indicator and shared a cost comparison of training epochs, highlighting a case where four epochs cost $2,368 versus $41,440 for fifty epochs with minor performance gains. Another engineer is considering combining several 8B models into a mixture of experts based on
+    <strong>
+     Gemma MoE
+    </strong>
+    and speculated on potential enhancements using
+    <strong>
+     DPO/ORPO techniques
+    </strong>
+    .
+   </p>
+   <p>
+    <strong>
+     The Saga of Repository Archival
+    </strong>
+    : Concerns were voiced about the sudden disappearance of Microsoft’s WizardLM repo, sparking a debate on the importance of archiving, especially in light of Microsoft's investment in OpenAI. Participants underscored the need for backups, drawing from instances such as the recent reveal of
+    <strong>
+     WizardLM-2
+    </strong>
+    , accessible on
+    <a href="https://huggingface.co/collections/microsoft/wizardlm-2-661d403f71e6c8257dbd598a?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Hugging Face
+    </a>
+    and
+    <a href="https://github.com/victorsungo/WizardLM/tree/main/WizardLM-2?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     GitHub
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Synthetic Data Generation: A One-Stop Shop
+    </strong>
+    :
+    <em>
+     Argilla’s Distilabel
+    </em>
+    was recommended for creating
+    <strong>
+     diverse synthetic data
+    </strong>
+    , with practical examples and repositories such as the
+    <a href="https://github.com/argilla-io/distilabel-workbench?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     distilabel-workbench
+    </a>
+    illustrating its applications. The conversation spanned single document data synthesis, multi-document challenges, and strategies for extended contexts in language models.
+   </p>
+   <p>
+    <strong>
+     Simulated World Engagements Rouse Curiosity
+    </strong>
+    : Websim’s capabilities to simulate CLI commands and full web pages have captivated users, with example simulations shared, such as the
+    <strong>
+     EVA AI interaction profile
+    </strong>
+    on
+    <a href="https://websim.ai/c/p3pZvmAYbsRT2hzBz?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Websim
+    </a>
+    . Speculations on the revival of World-Sim operated in parallel, and members looked forward to its reintroduction with a "pay-for-tokens" model.
+   </p>
+   <hr/>
+   <h2 id="openai-discord">
+    <a href="https://discord.com/channels/974519864045756446?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     OpenAI
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Apple's Open Source Pivot with OpenELM
+     </strong>
+     : Apple has released
+     <strong>
+      OpenELM
+     </strong>
+     , a family of efficient language models now available on Hugging Face, scaling from 270M to 3B parameters, marking their surprising shift towards open-source initiatives. Details about the models are
+     <a href="https://huggingface.co/apple/OpenELM?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      on Hugging Face
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Conversations Surrounding AI Sentience and Temporal Awareness
+     </strong>
+     : The community engaged in deep discussions emphasizing the difference between
+     <strong>
+      sentience
+     </strong>
+     —potentially linked to emotions and motivations—and
+     <strong>
+      consciousness
+     </strong>
+     —associated with knowledge acquisition. A parallel discussion pondered if intelligence and temporal awareness in AI are inherently discrete concepts, influencing our understanding of neural network identity and experiential dimension.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      AI Voice Assistant Tech Talk
+     </strong>
+     : AI enthusiasts compared notes on
+     <strong>
+      OpenWakeWords
+     </strong>
+     for homegrown voice assistant development and
+     <strong>
+      Gemini
+     </strong>
+     's promise as a Google Assistant rival. Technical challenges highlighted include the intricacies of interrupt AI speech and preferences for push-to-talk versus voice activation.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Rate Limit Riddles with Custom GPT Usage
+     </strong>
+     : Users sought clarity on
+     <strong>
+      GPT-4's usage caps
+     </strong>
+     especially when recalling large documents and shared tips on navigating the 3-hour rolling cap. The community is exploring the thresholds of rate limiting, particularly when employing custom GPT tools.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Prompt Engineering Prowess &amp; LLM Emergent Abilities
+     </strong>
+     : There's a focus on strategic prompt crafting for specific tasks such as developing GPT-based coding for
+     <strong>
+      Arma 3's SQF language
+     </strong>
+     . Fascination arises with
+     <strong>
+      emergent behaviors
+     </strong>
+     in LLMs, referring to phases of complexity leading to qualitative behavioral changes, exploring parallels to the concept of
+     <em>
+      More Is Different
+     </em>
+     in prompt engineering contexts.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="stabilityai-stable-diffusion-discord">
+    <a href="https://discord.com/channels/1002292111942635562?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Stability.ai (Stable Diffusion)
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     AI Rollout Must Be Crystal Clear
+    </strong>
+    : Valve's new
+    <strong>
+     content policy
+    </strong>
+    requires developers to disclose AI usage on
+    <strong>
+     Steam
+    </strong>
+    , particularly highlighting the need for transparency around live-generated AI content and mechanisms that ensure responsible deployment.
+   </p>
+   <p>
+    <strong>
+     Copyright Quandary in Content Creation
+    </strong>
+    : Conversations bubbled up over the legal complexities when generating content with public models such as
+    <strong>
+     Stable Diffusion
+    </strong>
+    ; there's a necessity to navigate copyright challenges, especially on platforms with rigorous copyright enforcement like
+    <strong>
+     Steam
+    </strong>
+    .
+   </p>
+   <p>
+    <strong>
+     Art Imitates Life or... Itself?
+    </strong>
+    : An inquiry raised by
+    <strong>
+     Customluke
+    </strong>
+    on how to create a model or a Lora to replicate their art style using
+    <strong>
+     Stable Diffusion
+    </strong>
+    sparked suggestions, with tools like
+    <strong>
+     dreambooth
+    </strong>
+    and
+    <strong>
+     kohya_ss
+    </strong>
+    surfaced for model and Lora creation respectively.
+   </p>
+   <p>
+    <strong>
+     Selecting the Better Suited AI Flavor
+    </strong>
+    : A vocal group of users find
+    <strong>
+     SD 1.5
+    </strong>
+    superior to
+    <strong>
+     SDXL
+    </strong>
+    for their needs, citing sharper results and better training process, evidence that the choice of AI model significantly impacts outcome quality.
+   </p>
+   <p>
+    <strong>
+     Polishing Image Generation
+    </strong>
+    : Tips were shared for improving image generation results, recommending alternatives such as
+    <strong>
+     Forge
+    </strong>
+    and
+    <strong>
+     epicrealismXL
+    </strong>
+    to enhance the output for those dissatisfied with the image quality from models like
+    <strong>
+     ComfyUI
+    </strong>
+    .
+   </p>
+   <hr/>
+   <h2 id="huggingface-discord">
+    <a href="https://discord.com/channels/879548962464493619?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     HuggingFace
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      BioMistral Launch for Medical LLMs
+     </strong>
+     :
+     <a href="https://huggingface.co/BioMistral/BioMistral-7B?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      BioMistral
+     </a>
+     , a new set of pretrained language models for medical applications, has been introduced, leveraging the capabilities of the foundational Mistral model.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Nvidia's Geopolitical Adaptation
+     </strong>
+     : To navigate US export controls, Nvidia has unveiled the RTX 4090D, a China-compliant GPU with reduced power consumption and CUDA cores, detailed in reports from
+     <a href="https://www.theverge.com/2023/12/29/24018799/nvidia-4090d-china-slower-us-sanctions?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      The Verge
+     </a>
+     and
+     <a href="https://videocardz.com/newz/nvidia-geforce-rtx-4090-with-blower-type-cooler-is-now-on-sale-in-china?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Videocardz
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Text to Image Model Fine-Tuning Discussed
+     </strong>
+     : Queries about optimizing text to image models led to suggestions involving the
+     <a href="https://github.com/huggingface/diffusers/tree/main/examples/text_to_image?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Hugging Face diffusers repository
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Gradio Interface for ConversationalRetrievalChain
+     </strong>
+     : Integration of ConversationalRetrievalChain with Gradio is in the works, with community efforts to include personalized PDFs and discussion regarding interface customization.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Improved Image Generation and AI Insights in Portuguese
+     </strong>
+     : New developments include an app at
+     <a href="https://collate.one/newsletter?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Collate.one
+     </a>
+     for digesting read-later content, advancements in generating high-def images in seconds at
+     <a href="https://huggingface.co/spaces/KingNish/Instant-Image?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      this space
+     </a>
+     , and
+     <a href="https://www.youtube.com/watch?v=A9qPlYVeiOs&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Brazilian Portuguese translations
+     </a>
+     of AI community highlights.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Quantization and Efficiency
+     </strong>
+     : There's active exploration on quantization techniques to maximize model efficiency on VRAM-limited systems, with preferences leaning toward Q4 or Q5 levels for a balance between performance and resource management.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Table-Vision Models and COCO Dataset Clarification
+     </strong>
+     : There's a request for recommendations on vision models adept at table-based question-answering, and security concerns raised regarding the hosting of the official COCO datasets via an HTTP connection.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Call for Code-Centric Resources and TLM v1.0
+     </strong>
+     : The engineering community is seeking more tools with direct code links, as exemplified by
+     <a href="https://github.com/valeman/awesome-conformal-prediction?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      awesome-conformal-prediction
+     </a>
+     , and the launch of v1.0 of the Trustworthy Language Model (TLM), introducing a confidence score feature, is celebrated with a
+     <a href="https://tlm.cleanlab.ai/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      playground
+     </a>
+     and
+     <a href="https://help.cleanlab.ai/tutorials/tlm/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      tutorial
+     </a>
+     .
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="eleuther-discord">
+    <a href="https://discord.com/channels/729741769192767510?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Eleuther
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Parallel Ponderings Pose No Problems
+     </strong>
+     : Engineers highlighted that some
+     <strong>
+      model architectures
+     </strong>
+     , specifically PaLM, employ
+     <strong>
+      parallel attention and FFN (feedforward neural networks)
+     </strong>
+     , deviating from the series perception some papers present.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Data Digestion Detailing
+     </strong>
+     : The
+     <strong>
+      Pile dataset's hash values
+     </strong>
+     were shared, offering a reference for those looking to utilize the dataset in various JSON files, an aid found on
+     <a href="https://www.eleuther.ai/hashes?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      EleutherAI's hash list
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Thinking Inside the Sliding Window
+     </strong>
+     : Dialogue on
+     <strong>
+      transformers
+     </strong>
+     considered
+     <strong>
+      sliding window attention
+     </strong>
+     and effective receptive fields, analogizing them to convolutional mechanisms and their impact on attention's focus.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Layer Learning Ladders Lengthen Leeway
+     </strong>
+     : Discussions about improving transformers' handling of
+     <strong>
+      lengthier sequence lengths
+     </strong>
+     touched upon strategies like integrating RNN-type layers or employing dilated windows within the architecture.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      PyTorch's New Power Player
+     </strong>
+     : A new
+     <strong>
+      PyTorch library, torchtitan
+     </strong>
+     , was introduced via a
+     <a href="https://github.com/pytorch/torchtitan?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      GitHub link
+     </a>
+     , promising to ease the journey of training larger models.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Linear Logic Illuminates Inference
+     </strong>
+     : The mechanics of
+     <strong>
+      linear attention
+     </strong>
+     were unpacked, illustrating its sequence-length linearity and constant memory footprint, essential insights for future model optimization.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Performance Parity Presumption
+     </strong>
+     : One engineer reported that the
+     <strong>
+      phi-3-mini-128k
+     </strong>
+     might match the
+     <strong>
+      Llama-3-8B
+     </strong>
+     , triggering a talk on the influences of pre-training data on model benchmarking and baselines.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Delta Decision's Dual Nature
+     </strong>
+     : The possibility of
+     <strong>
+      delta rule linear attention
+     </strong>
+     enabling more structured yet less parallelizable operations stirred a comparison debate, supported by a
+     <a href="https://manifestai.com/blogposts/faster-after-all/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      MastifestAI blog post
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Testing Through a Tiny Lens
+     </strong>
+     : Members cast doubt on "needle in the haystack" tests for long-context language models, advocating for real-world application as a more robust performance indicator.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Prompt Loss Ponderings
+     </strong>
+     : The group questioned the systemic study of masking user prompt loss during supervised fine-tuning (SFT), noting a research gap despite its frequent use in language model training.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Five is the GSM8K Magic Number
+     </strong>
+     : There was a consensus suggesting that using
+     <em>
+      5
+     </em>
+     few-shot examples is the appropriate alignment with the
+     <strong>
+      Hugging Face leaderboard
+     </strong>
+     criteria for
+     <strong>
+      GSM8K
+     </strong>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      VLLM Version Vivisection
+     </strong>
+     : Dialogue identified
+     <strong>
+      Data Parallel (DP)
+     </strong>
+     as a stumbling block in updating
+     <strong>
+      VLLM
+     </strong>
+     to its latest avatar, while
+     <strong>
+      Tensor Parallel (TP)
+     </strong>
+     appeared a smoother path.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Calling Coders to Contribute
+     </strong>
+     : The lm-evaluation-harness appeared to be missing a
+     <code>
+      register_filter
+     </code>
+     function, leading to a call for contributors to submit a PR to bolster the utility.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Brier Score Brain Twister
+     </strong>
+     : An anomaly within the
+     <strong>
+      ARC evaluation
+     </strong>
+     data led to a suggestion that the Brier score function be refitted to ensure error-free assessments regardless of data inconsistencies.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Template Tête-à-Tête
+     </strong>
+     : Interest was piqued regarding the status of a chat templating branch in
+     <em>
+      Hailey's branch
+     </em>
+     , last updated a while ago, sparking an inquiry into the advancement of this functionality.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="openrouter-alex-atallah-discord">
+    <a href="https://discord.com/channels/1091220969173028894?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     OpenRouter (Alex Atallah)
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Mixtral Muddle
+    </strong>
+    : A provider of
+    <strong>
+     Mixtral 8x7b
+    </strong>
+    faced an issue of sending blank responses, leading to their temporary removal from OpenRouter. Auto-detection methods for such failures are under consideration.
+   </p>
+   <p>
+    <strong>
+     Soliloquy's Subscription Surprise
+    </strong>
+    : The
+    <strong>
+     Soliloquy 8B
+    </strong>
+    model transitioned to a paid service, charging
+    <strong>
+     $0.1 per 1M tokens
+    </strong>
+    . Further information and discussions are available at
+    <a href="https://openrouter.ai/models/lynn/soliloquy-l3?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Soliloquy 8B
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     DBRX AI Achieves AI Astonishment
+    </strong>
+    : Fprime-ai announced a significant advancement with their
+    <strong>
+     DBRX AI
+    </strong>
+    on LinkedIn, sparking interest and discussions in the community. The LinkedIn announcement can be read
+    <a href="https://www.linkedin.com/posts/fprime-ai_fprimeailabs-dbrx-ai-activity-7189599191201980417-Te5d?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     here
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Creative Model Melee
+    </strong>
+    : Community members argued about the best open-source model for role-play creativity, with
+    <strong>
+     WizardLM2 8x22B
+    </strong>
+    and
+    <strong>
+     Mixtral 8x22B
+    </strong>
+    emerging as top contenders due to their creative capabilities.
+   </p>
+   <p>
+    <strong>
+     The Great GPT-4 Turbo Debate
+    </strong>
+    : Microsoft's influence on the
+    <strong>
+     Wizard LM
+    </strong>
+    project incited a heated debate, leading to a deep dive into the incidence, performance, and sustainability of models like GPT-4, Llama 3, and WizardLM. Resources shared include an
+    <a href="https://rocky-muscle-755.notion.site/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     incident summary
+    </a>
+    and a miscellaneous
+    <a href="https://openrouter.ai/models?q=free&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     OpenRouter model list
+    </a>
+    .
+   </p>
+   <hr/>
+   <h2 id="llamaindex-discord">
+    <a href="https://discord.com/channels/1059199217496772688?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     LlamaIndex
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Create-llama Simplifies RAG Setup
+    </strong>
+    : The
+    <strong>
+     create-llama v0.1
+    </strong>
+    release brings new support for
+    <strong>
+     @ollama
+    </strong>
+    and vector database integrations, making it easier to deploy RAG applications with llama3 and phi3 models, as detailed in their
+    <a href="https://twitter.com/llama_index/status/1783528887726817653?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     announcement tweet
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     LlamaParse Touted in Hands-on Tutorial and Webinar
+    </strong>
+    : A hands-on tutorial showcases how
+    <strong>
+     LlamaParse
+    </strong>
+    ,
+    <strong>
+     @JinaAI_ embeddings
+    </strong>
+    ,
+    <strong>
+     @qdrant_engine vector storage
+    </strong>
+    , and
+    <strong>
+     Mixtral 8x7b
+    </strong>
+    can be used to create sophisticated RAG applications, available
+    <a href="https://twitter.com/llama_index/status/1783601807903863184?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     here
+    </a>
+    , while KX Systems hosts a webinar to unlock complex document parsing capabilities with
+    <strong>
+     LlamaParse
+    </strong>
+    (details in
+    <a href="https://twitter.com/llama_index/status/1783622871614664990?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     this tweet
+    </a>
+    ).
+   </p>
+   <p>
+    <strong>
+     AWS Joins Forces with LlamaIndex for Developer Workshop
+    </strong>
+    : AWS collaborates with
+    <strong>
+     @llama_index
+    </strong>
+    to provide a workshop focusing on LLM app development, integrating AWS services and LlamaParse; more details can be found
+    <a href="https://twitter.com/llama_index/status/1783877951278432733?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     here
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Deep Dive into Advanced RAG Systems
+    </strong>
+    : The community engaged in robust discussions on improving RAG systems and shared a video on advanced setup techniques, addressing everything from sentence-window retrieval to integrating structured Pydantic output (
+    <a href="https://learn.deeplearning.ai/courses/building-evaluating-advanced-rag/lesson/5/auto-merging-retrieval?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Lesson on Advanced RAG
+    </a>
+    ).
+   </p>
+   <p>
+    <strong>
+     Local LLM Deployment Strategies Discussed
+    </strong>
+    : There was active dialogue on employing local LLM setups to circumvent reliance on external APIs, with guidance provided in the official
+    <strong>
+     LlamaIndex documentation
+    </strong>
+    (
+    <a href="https://docs.llamaindex.ai/en/stable/getting_started/starter_example_local/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Starter Example with Local LLM
+    </a>
+    ), showcasing strategies for resolving import errors and proper package installation.
+   </p>
+   <hr/>
+   <h2 id="laion-discord">
+    <a href="https://discord.com/channels/823813159592001537?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     LAION
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Llama 3's Mixed Reception
+    </strong>
+    : Community feedback on
+    <strong>
+     Llama 3
+    </strong>
+    is divided, with some highlighting its inadequate code recall abilities compared to expectations set by GPT-4, while others speculate the potential for configuration enhancements to bridge the performance gap.
+   </p>
+   <p>
+    <strong>
+     Know Your Customer Cloud Conundrum
+    </strong>
+    : The proposed U.S. "Know Your Customer" policies for cloud services spark concern and discussion, emphasizing the necessity for community input on the
+    <a href="https://www.federalregister.gov/documents/2024/01/29/2024-01580/taking-additional-steps-to-address-the-national-emergency-with-respect-to-significant-malicious?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Federal Register
+    </a>
+    before the feedback window closes.
+   </p>
+   <p>
+    <strong>
+     Boost in AI Model Training Efficiency
+    </strong>
+    : Innovations in vision model training are making waves with a
+    <em>
+     weakly supervised pre-training method
+    </em>
+    that races past traditional contrastive learning, achieving
+    <strong>
+     2.7 times faster
+    </strong>
+    training as elucidated in this
+    <a href="https://arxiv.org/abs/2404.15653?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     research
+    </a>
+    . The approach shuns contrastive learning's heavy compute costs for a multilabel classification framework, yielding a performance on par with
+    <strong>
+     CLIP
+    </strong>
+    models.
+   </p>
+   <p>
+    <strong>
+     The VAST Landscape of Omni-Modality
+    </strong>
+    : Enthusiasm is sighted for finetuning
+    <strong>
+     VAST
+    </strong>
+    , a Vision-Audio-Subtitle-Text Omni-Modality Foundation Model. The project indicates a stride towards omni-modality with the resources available at its
+    <a href="https://github.com/txh-mercury/vast?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     GitHub repository
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Nightshade's Transparency Troubles
+    </strong>
+    : The guild debates the effectiveness and transparency of
+    <strong>
+     Nightshade
+    </strong>
+    with a critical lens on autoencoder capabilities and reluctances in the publishing of potentially controversial findings.
+   </p>
+   <hr/>
+   <h2 id="openinterpreter-discord">
+    <a href="https://discord.com/channels/1146610656779440188?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     OpenInterpreter
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Mac Muscle Meets Interpreter Might
+    </strong>
+    : Open Interpreter's
+    <strong>
+     New Computer Update
+    </strong>
+    has significantly improved local functionality, particularly with
+    <strong>
+     native Mac integrations
+    </strong>
+    . The implementation allows users to control Mac's native applications using simple commands such as
+    <code>
+     interpreter --os
+    </code>
+    , as detailed in their
+    <a href="https://changes.openinterpreter.com/log/ncu-ii?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     change log
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Eyes for AI
+    </strong>
+    : Community members highlighted the
+    <strong>
+     Moondream tiny vision language model
+    </strong>
+    , providing resources like the
+    <a href="https://github.com/CodeAKrome/bootcupboard/blob/main/llm-img/Img2TxtMoondream.py?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Img2TxtMoondream.py script
+    </a>
+    . Discussions also featured
+    <strong>
+     LLaVA
+    </strong>
+    , a multimodal model hosted on
+    <a href="https://huggingface.co/liuhaotian/llava-v1.6-34b?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Hugging Face
+    </a>
+    , which is grounded in the powerful
+    <strong>
+     NousResearch/Nous-Hermes-2-Yi-34B
+    </strong>
+    model.
+   </p>
+   <p>
+    <strong>
+     Loop Avoidance Lore
+    </strong>
+    : Engineers have been swapping strategies to mitigate looping behavior in local models, considering solutions ranging from tweaking
+    <em>
+     temperature settings
+    </em>
+    and
+    <em>
+     prompt editing
+    </em>
+    to more complex
+    <em>
+     architectural changes
+    </em>
+    . An intriguing concept, the
+    <em>
+     frustration metric
+    </em>
+    , was introduced to tailor a model's responses when stuck in repetitive loops.
+   </p>
+   <p>
+    <strong>
+     Driving Dogs with Dialogue
+    </strong>
+    : A member inquired about the prospect of leveraging
+    <strong>
+     Open Interpreter
+    </strong>
+    for commanding the
+    <strong>
+     Unitree GO2 robodog
+    </strong>
+    , sparking interest in possible interdisciplinary applications. Technical challenges, such as setting dummy API keys and resolving namespace conflicts with Pydantic, were also tackled with shared solutions.
+   </p>
+   <p>
+    <strong>
+     Firmware Finality
+    </strong>
+    : The
+    <strong>
+     Open Interpreter 0.2.5 New Computer Update
+    </strong>
+    has officially graduated from beta, including the fresh enhancements mentioned earlier. A query about the update's beta status led to an affirmative response after a version check.
+   </p>
+   <hr/>
+   <h2 id="openaccess-ai-collective-axolotl-discord">
+    <a href="https://discord.com/channels/1104757954588196865?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     OpenAccess AI Collective (axolotl)
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     CEO's Nod to a Member's Tweet
+    </strong>
+    : A participant was excited about the
+    <em>
+     CEO of Hugging Face acknowledging their tweet
+    </em>
+    ; network and recognition are alive in the community.
+   </p>
+   <p>
+    <strong>
+     Tech Giants Jump Into Fine-tuning
+    </strong>
+    : With examples like
+    <strong>
+     <a href="https://arxiv.org/abs/2311.16079?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Meditron
+     </a>
+    </strong>
+    , discussion on fine-tuning language models for specific uses is heating up, highlighting the promise for domain-specific improvements and hinting at an
+    <strong>
+     upcoming paper
+    </strong>
+    on continual pre-training.
+   </p>
+   <p>
+    <strong>
+     Trouble in Transformer Town
+    </strong>
+    : An 'AttributeError' surfaced in
+    <strong>
+     transformers 4.40.0
+    </strong>
+    , tripping up a user, serving as a cautionary tale that even small updates can break workflows.
+   </p>
+   <p>
+    <strong>
+     Mixing Math with Models
+    </strong>
+    : Despite some confusion, inquiries were made about integrating
+    <strong>
+     zzero3
+    </strong>
+    with
+    <strong>
+     Fast Fourier Transform (fft)
+    </strong>
+    ; keep an eye out for this complex dance of algorithms.
+   </p>
+   <p>
+    <strong>
+     Optimizer Hunt Heats Up
+    </strong>
+    : The
+    <strong>
+     FSDP (Fully Sharded Data Parallel)
+    </strong>
+    compatibility with optimizers remains a hot topic, with findings that
+    <strong>
+     AdamW
+    </strong>
+    and
+    <strong>
+     SGD
+    </strong>
+    are in the clear, while
+    <code>
+     paged_adamw_8bit
+    </code>
+    is not supporting FSDP offloading, leading to a quest for alternatives within the
+    <strong>
+     OpenAccess-AI-Collective/axolotl
+    </strong>
+    resources.
+   </p>
+   <hr/>
+   <h2 id="cohere-discord">
+    <a href="https://discord.com/channels/954421988141711382?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Cohere
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Upload Hiccups and Typographic Tangles
+    </strong>
+    : Users in the
+    <strong>
+     Cohere
+    </strong>
+    guild tackled issues with the
+    <strong>
+     Cohere Toolkit
+    </strong>
+    on Azure, pointing to the paper clip icon for uploads; despite this, problems persisted with the upload functionality going undiscovered. The
+    <strong>
+     Cohere typeface
+    </strong>
+    's licensing on GitHub provoked discussion; it's not under the MIT license and is slated for replacement.
+   </p>
+   <p>
+    <strong>
+     Model Usage Must-Knows
+    </strong>
+    : Discussion clarified that Cohere's
+    <a href="https://huggingface.co/spaces/CohereForAI/c4ai-command-r-plus?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Command+ models
+    </a>
+    are available with open weight access but not for commercial use, and the training data is not shared.
+   </p>
+   <p>
+    <strong>
+     Search API Shift Suggestion
+    </strong>
+    : The guild mulled over the potential switch from
+    <strong>
+     Tavily
+    </strong>
+    to the
+    <strong>
+     Brave Search API
+    </strong>
+    for integrating with the Cohere-Toolkit, citing potential benefits in speed, cost, and accuracy in retrieval.
+   </p>
+   <p>
+    <strong>
+     Toolkit Deployment Debates
+    </strong>
+    : Deployment complexities of the Cohere Toolkit on Azure were deliberated, where selecting a model deployment option is crucial and the API key is not needed. Conversely, local addition of tools faced issues with PDF uploads and sqlite3 version compatibility.
+   </p>
+   <p>
+    <strong>
+     Critical Recall on 'Hit Piece'
+    </strong>
+    : Heated discussions emerged over the criticism of a "hit piece" against
+    <em>
+     Cohere
+    </em>
+    , with dialogue focused on the responsibility of AI agents and their real-world actions. A push for critical accountability emerged, with members reinforcing the need to back up critiques with substantial claims.
+   </p>
+   <hr/>
+   <h2 id="tinygrad-george-hotz-discord">
+    <a href="https://discord.com/channels/1068976834382925865?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     tinygrad (George Hotz)
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Tinygrad Sprints Towards Version 1.0
+     </strong>
+     : Tinygrad is gearing up for its 1.0 version, spotlighting an API that's nearing stability, and has a toolkit that includes
+     <a href="https://tinygrad.github.io/tinygrad/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      installation guidance
+     </a>
+     , a
+     <a href="https://tinygrad.github.io/tinygrad/mnist/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      MNIST tutorial
+     </a>
+     , and comprehensive
+     <a href="https://tinygrad.github.io/tinygrad/developer/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      developer documentation
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Comma Begins Tinybox Testing with tinygrad
+     </strong>
+     : George Hotz emphasized tinybox by comma as an exemplary testbed for tinygrad, with a focus maintained on software over hardware, while a potential tinybox 2 collaboration looms.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Crossing off Tenstorrent
+     </strong>
+     : After evaluation, a partnership with Tenstorrent was eschewed due to inefficiencies in their hardware, leaving the door ajar for future collaboration if the cost-benefit analysis shifts favorably.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Sorting Through tinygrad's Quantile Function Challenge
+     </strong>
+     : A dive into tinygrad's development revealed efforts to replicate
+     <code>
+      torch.quantile
+     </code>
+     for diffusion model sampling, a complex task necessitating a precise sorting algorithm within the framework.
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      AMMD's MES Offers Little to tinygrad
+     </strong>
+     : AMD's Machine Environment Settings (MES) received a nod from Hotz for its detailed breakdown by Felix from AMD, but ultimately assessed as irrelevant to tinygrad's direction, with efforts focused on developing a PM4 backend instead.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="modular-mojo-discord">
+    <a href="https://discord.com/channels/1087530497313357884?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Modular (Mojo 🔥)
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Strong Performer: Hermes 2.5 Edges Out Hermes 2
+    </strong>
+    : Enhanced with code instruction examples,
+    <strong>
+     Hermes 2.5
+    </strong>
+    demonstrates superior performance across various benchmarks when compared to
+    <strong>
+     Hermes 2
+    </strong>
+    .
+   </p>
+   <p>
+    <strong>
+     Security in the Limelight
+    </strong>
+    : Amidst sweeping software and feature releases by Modular, addressing security loopholes becomes critical, emphasizing protection against supply chain attacks like the
+    <strong>
+     XZ incident
+    </strong>
+    and the trend of open-source code prevalence in software development forecasted to hit
+    <strong>
+     96% by 2024
+    </strong>
+    .
+   </p>
+   <p>
+    <strong>
+     Quantum Complexity Through A Geometric Lens
+    </strong>
+    : Members discussed how the geometric concept of the
+    <strong>
+     amplituhedron
+    </strong>
+    could simplify quantum particle scattering amplitudes, with machine learning being suggested as a tool to decipher increased complexities in visualizing
+    <strong>
+     quantum states
+    </strong>
+    as systems scale.
+   </p>
+   <p>
+    <strong>
+     All About Mojo
+    </strong>
+    : Dialogue around the
+    <strong>
+     Mojo Programming Language
+    </strong>
+    covered topics like assured memory cleanup by the OS, the variance between
+    <code>
+     def
+    </code>
+    and
+    <code>
+     fn
+    </code>
+    functions with examples found
+    <a href="https://docs.modular.com/mojo/manual/functions?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     here
+    </a>
+    , and the handling of mixed data type lists via
+    <code>
+     Variant
+    </code>
+    that requires improvement.
+   </p>
+   <p>
+    <strong>
+     Moving Forward with Mojo
+    </strong>
+    : ModularBot flagged an issue filed on GitHub about
+    <strong>
+     Mojo
+    </strong>
+    , urged members to use issues for better tracking of concerns, for instance, about
+    <code>
+     __copyinit__
+    </code>
+    semantics
+    <a href="https://gist.github.com/modularbot/6aed759930420cd70f38795dbcb874fe?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     via GitHub Gist
+    </a>
+    , and reported a cleaner update in code with more insertions than deletions, achieving better efficiency.
+   </p>
+   <hr/>
+   <h2 id="langchain-ai-discord">
+    <a href="https://discord.com/channels/1038097195422978059?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     LangChain AI
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     A Tricky Query for Anti-Trolling AI Design
+    </strong>
+    : A user proposed designing an
+    <strong>
+     anti-trolling AI
+    </strong>
+    and sought suggestions on how the system could effectively target online bullies.
+   </p>
+   <p>
+    <strong>
+     Verbose SQL Headaches
+    </strong>
+    : Participants shared experiences with open-source models like
+    <strong>
+     Mistral
+    </strong>
+    and
+    <strong>
+     Llama3
+    </strong>
+    generating overly verbose SQL responses and encountered an
+    <code>
+     OutputParserException
+    </code>
+    , with links to
+    <a href="https://python.langchain.com/docs/integrations/chat/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     structured output support
+    </a>
+    and examples of invoking SQL Agents.
+   </p>
+   <p>
+    <strong>
+     RedisStore vs. Chat Memory
+    </strong>
+    : The community clarified the difference between
+    <strong>
+     stores
+    </strong>
+    and
+    <strong>
+     chat memory
+    </strong>
+    in the context of LangChain integrations, emphasizing the specific use of
+    <code>
+     RedisStore
+    </code>
+    for key-value storage and
+    <strong>
+     Redis Chat Message History
+    </strong>
+    for session-based chat persistence.
+   </p>
+   <p>
+    <strong>
+     Techie Tutorial on Model Invocation
+    </strong>
+    : There was a discussion on the correct syntax when integrating prompts into LangChain models via JavaScript, with recommendations for using
+    <code>
+     ChatPromptTemplate
+    </code>
+    and
+    <code>
+     pipe
+    </code>
+    methods for chaining prompts.
+   </p>
+   <p>
+    <strong>
+     Gemini 1.5 Access with a Caveat
+    </strong>
+    : Users discussed the integration of
+    <strong>
+     Gemini 1.5 Pro
+    </strong>
+    with LangChain, highlighting that it necessitates
+    <code>
+     ChatVertexAI
+    </code>
+    instead of
+    <code>
+     ChatGoogleGenerativeAI
+    </code>
+    and requires configuring the
+    <code>
+     GOOGLE_APPLICATION_CREDENTIALS
+    </code>
+    environment variable for proper access.
+   </p>
+   <hr/>
+   <h2 id="latent-space-discord">
+    <a href="https://discord.com/channels/822583790773862470?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Latent Space
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Apple Bites the Open Source Apple
+    </strong>
+    : Apple has stepped into the open source realm, releasing a suite of models with parameters ranging from 270M to 3B, with the
+    <a href="https://huggingface.co/collections/apple/openelm-instruct-models-6619ad295d7ae9f868b759ca?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     270M parameter model available on Hugging Face
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Dify Platform Ups and Downs
+    </strong>
+    : The open-source LLM app development platform Dify is gaining traction for combining AI workflows and model management, although concerns have arisen about its lack of
+    <a href="https://github.com/langgenius/dify?tab=readme-ov-file&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     loops and context scopes
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     PyTorch Pumps Up LLM Training
+    </strong>
+    : PyTorch has introduced
+    <a href="https://github.com/pytorch/torchtitan?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Torchtitan
+    </a>
+    , a library dedicated to aiding the training of substantial language models like llama3 from scratch.
+   </p>
+   <p>
+    <strong>
+     Video Gen Innovation with SORA
+    </strong>
+    : OpenAI's SORA, a video generation model that crafts videos up to a minute long, is getting noticed, with user experiences and details explored in an
+    <a href="https://www.fxguide.com/fxfeatured/actually-using-sora/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     FXGuide article
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     MOD Layers for Efficient Transformer Training
+    </strong>
+    : The 'Mixture of Depths' paper was presented, proposing an accelerated training methodology for transformers by alternately using new MOD layers and traditional transformer layers, introduced in the
+    <a href="https://paper-club.ivanleo.com/papers/mixture-of-depths?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     presentation
+    </a>
+    and detailed in the paper's
+    <a href="https://arxiv.org/abs/2402.00841?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     abstract
+    </a>
+    .
+   </p>
+   <hr/>
+   <h2 id="mozilla-ai-discord">
+    <a href="https://discord.com/channels/1089876418936180786?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Mozilla AI
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Phi-3-Mini-4K Instruct Powers Up
+     </strong>
+     : Utilizing
+     <strong>
+      Phi-3-Mini-4K-Instruct
+     </strong>
+     with llamafile provides a setup for high-quality and dense reasoning datasets as discussed by members, with
+     <a href="https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#how-to-use-with-llamafile" target="_blank">
+      integration steps outlined on Hugging Face
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Model Download Made Easier
+     </strong>
+     : A README update for
+     <strong>
+      Mixtral 8x22B Instruct llamafile
+     </strong>
+     includes a download tip: use
+     <code>
+      curl -L
+     </code>
+     for smooth redirections on CDNs, as seen in the
+     <a href="https://huggingface.co/jartine/Mixtral-8x22B-Instruct-v0.1-llamafile?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Quickstart guide
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Llamafile and CPUs Need to Talk
+     </strong>
+     : An issue with running llamafile on an
+     <strong>
+      Apple M1
+     </strong>
+     Mac surfaced due to AVX CPU feature requirements, with the temporary fix of a system restart and advice for using smaller models on 8GB RAM systems shared in this
+     <a href="https://github.com/Mozilla-Ocho/llamafile/issues/327?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its#issuecomment-2053680659" target="_blank">
+      GitHub issue
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Windows Meets Llamafile, Confusion Ensues
+     </strong>
+     : Users reported
+     <strong>
+      Windows Defender
+     </strong>
+     mistakenly detecting llamafile as a trojan. Workarounds proposed included using virtual machines or whitelisting, with the reminder that official binaries can be found
+     <a href="https://www.microsoft.com/en-us/wdsi/filesubmission?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      here
+     </a>
+     .
+    </li>
+   </ul>
+   <ul>
+    <li>
+     <strong>
+      Resource-Hungry Models Test Limits
+     </strong>
+     : Engaging the 8x22B model requires heavy resources, with references to a recommended 128GB RAM for stable execution of
+     <a href="https://github.com/Mozilla-Ocho/llamafile/releases/tag/0.8?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      Mistral 8x22B model
+     </a>
+     , marking the necessity for big memory footprints when running sophisticated AI models.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="discoresearch-discord">
+    <a href="https://discord.com/channels/1178995845727785010?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     DiscoResearch
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Llama Beats Judge in Judging
+    </strong>
+    : On the
+    <strong>
+     Judgemark
+    </strong>
+    benchmark,
+    <strong>
+     Llama-3-70b
+    </strong>
+    showcased impressive performance, demonstrating its potential for fine-tuning purposes in
+    <strong>
+     disco-judge
+    </strong>
+    applications, as it supports at least 8k context length. The community also touched on collaborative evaluation efforts, with references to advanced judging prompt design to assess complex rubrics.
+   </p>
+   <p>
+    <strong>
+     Benchmarking Models and Discussing Inference Issues
+    </strong>
+    :
+    <strong>
+     Phi-3-mini-4k-instruct
+    </strong>
+    unexpectedly ranked lower on the
+    <strong>
+     eq-bench
+    </strong>
+    leaderboard despite promising scores in published evaluations. In model deployment, discussions highlighted issues like slow initialization and inference times for
+    <strong>
+     DiscoLM_German_7b_v1
+    </strong>
+    and potential misconfigurations that could be remedied using
+    <code>
+     device_map='auto'
+    </code>
+    .
+   </p>
+   <p>
+    <strong>
+     Tooling API Evaluation and Hugging Face Inquiries
+    </strong>
+    : Community debates highlighted
+    <strong>
+     Tgi
+    </strong>
+    for its API-first, low-latency approach and praised
+    <strong>
+     vllm
+    </strong>
+    for being a user-friendly library optimized for cost-efficiency in deployment. Queries on Hugging Face's batch generation capabilities sparked discussion, with community involvement evident in a GitHub issue exchange.
+   </p>
+   <p>
+    <strong>
+     Gratitude and Speculation in Model Development
+    </strong>
+    : Despite deployment issues, members have expressed appreciation for the
+    <strong>
+     DiscoLM
+    </strong>
+    model series, while also speculating about the potential of constructing an
+    <strong>
+     8 x phi-3 MoE model
+    </strong>
+    to bolster model capabilities.
+    <strong>
+     DiscoLM-70b
+    </strong>
+    was also a hot topic, with users troubleshooting errors and sharing usage experiences.
+   </p>
+   <p>
+    <strong>
+     Success and Popularity in Model Adoption
+    </strong>
+    : The adaptation of the
+    <strong>
+     Phi-3-mini-4k
+    </strong>
+    model, referred to as llamafication, yielded a respectable EQ-Bench Score of 51.41 for German language outputs. Conversation also pinpointed the swift uptake of the
+    <strong>
+     gguf
+    </strong>
+    model, indicated by a notable number of downloads shortly after its release.
+   </p>
+   <hr/>
+   <h2 id="interconnects-nathan-lambert-discord">
+    <a href="https://discord.com/channels/1179127597926469703?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Interconnects (Nathan Lambert)
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Claude Displays Depth and Structure
+    </strong>
+    : In a rich discussion, the behavior and training of
+    <strong>
+     Claude
+    </strong>
+    were considered "mostly orthogonal" to Anthropic's vision, revealing unexpected depth and structural understanding through
+    <strong>
+     RLAIF training
+    </strong>
+    . Comparisons were made to concepts like "Jungian individuation" and conversation threads
+    <a href="https://x.com/repligate/status/1783426037210026372?s=46&amp;t=xxWoJxAS_7-BBFC2ro84Zw&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     highlighted Claude's capabilities
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Debating the Merits of RLHF vs. KTO
+    </strong>
+    : A comparison between
+    <strong>
+     Reinforcement Learning from Human Feedback (RLHF)
+    </strong>
+    and
+    <strong>
+     Knowledge-Targeted Optimization (KTO)
+    </strong>
+    sparked debate, considering their suitability for different commercial deployments.
+   </p>
+   <p>
+    <strong>
+     Training Method Transition Yields Improvements
+    </strong>
+    : An interview was mentioned where a progression in training methods from
+    <strong>
+     Supervised Fine Tuning (SFT)
+    </strong>
+    to
+    <strong>
+     Data Programming by Demonstration (DPO)
+    </strong>
+    , and then to
+    <strong>
+     KTO
+    </strong>
+    , led to improved performance based on user feedback.
+   </p>
+   <p>
+    <strong>
+     Unpacking the Complexity of RLHF
+    </strong>
+    : The community acknowledged the intricacies of
+    <strong>
+     RLHF
+    </strong>
+    , especially as they relate to varying data sources and their impact on downstream evaluation metrics.
+   </p>
+   <p>
+    <strong>
+     Probing Grad Norm Spikes
+    </strong>
+    : A request for clarity on the implications of gradient norm spikes during pretraining was made, emphasizing the potential adverse effects but specifics were not delivered in the responses.
+   </p>
+   <hr/>
+   <h2 id="skunkworks-ai-discord">
+    <a href="https://discord.com/channels/1131084849432768614?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Skunkworks AI
+    </a>
+    Discord
+   </h2>
+   <p>
+    <strong>
+     Moondream Takes On CAPTCHAs
+    </strong>
+    : A
+    <a href="https://www.youtube.com/watch?v=Gwq7smiWLtc&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     video guide
+    </a>
+    showcases fine-tuning the
+    <strong>
+     Moondream Vision Language Model
+    </strong>
+    for better performance on a CAPTCHA image dataset, aimed at improving its image recognition capabilities for practical applications.
+   </p>
+   <p>
+    <strong>
+     Low-Cost AI Models Make Cents
+    </strong>
+    : The document "Low-Cost Language Models: Survey and Performance Evaluation on Python Code Generation" was shared, covering evaluations of
+    <strong>
+     CPU-friendly language models
+    </strong>
+    and introducing a novel dataset with 60 programming problems. The use of a Chain-of-Thought prompt strategy is highlighted in the
+    <a href="https://arxiv.org/abs/2404.11160?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     survey article
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Meet, Greet, and Compute
+    </strong>
+    : AI developers are invited to a meetup at
+    <strong>
+     Cohere space
+    </strong>
+    in Toronto, which promises networking opportunities alongside lightning talks and demos — details available on the
+    <a href="https://lu.ma/devs5?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     event page
+    </a>
+    .
+   </p>
+   <p>
+    <strong>
+     Arctic Winds Blow for Enterprises
+    </strong>
+    :
+    <strong>
+     Snowflake Arctic
+    </strong>
+    is introduced via a
+    <a href="https://www.youtube.com/watch?v=nV6eIjnHEH0&amp;utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     new video
+    </a>
+    , positioning itself as a cost-effective, enterprise-ready Large Language Model to complement the suite of AI tools tailored for business applications.
+   </p>
+   <hr/>
+   <h2 id="datasette-llm-simonw-discord">
+    <a href="https://discord.com/channels/823971286308356157?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Datasette - LLM (@SimonW)
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Run Models Locally with Ease
+     </strong>
+     : Engineers explored
+     <a href="https://jan.ai/?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      jan.ai
+     </a>
+     , a GUI commended for its straightforward approach for running GPT models on local machines, potentially simplifying the experimentation process.
+    </li>
+    <li>
+     <strong>
+      Apple Enters the Language Model Arena
+     </strong>
+     : The new
+     <a href="https://huggingface.co/apple/OpenELM?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+      OpenELM
+     </a>
+     series introduced by Apple provides a spectrum of efficiently scaled language models, including instruction-tuned variations, which could change the game for parameter efficiency in modeling.
+    </li>
+   </ul>
+   <hr/>
+   <h2 id="alignment-lab-ai-discord">
+    <a href="https://discord.com/channels/1087862276448595968?utm_source=ainews&amp;utm_medium=email&amp;utm_campaign=ainews-apples-openelm-beats-olmo-with-50-of-its" target="_blank">
+     Alignment Lab AI
+    </a>
+    Discord
+   </h2>
+   <ul>
+    <li>
+     <strong>
+      Llama 3 Steps Up in Topic Complexity
+     </strong>
+     : Venadore has started experimenting with
+     <strong>
+      llama 3
+     </strong>
+     for topic complexity classification, reporting promising results.
+    </li>
+   </ul>
+   <hr/>
+   <p>
+    The
+    <strong>
+     LLM Perf Enthusiasts AI Discord
+    </strong>
+    has no new messages. If this guild has been quiet for too long, let us know and we will remove it.
+   </p>
+   <hr/>
+   <p>
+    The
+    <strong>
+     AI21 Labs (Jamba) Discord
+    </strong>
+    has no new messages. If this guild has been quiet for too long, let us know and we will remove it.
+   </p>
+   <hr/>
+  </div>
+ </body>
+</html>
