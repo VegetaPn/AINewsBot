@@ -22,7 +22,7 @@ logger.addHandler(console_handler)
 if __name__ == '__main__':
     task_id = "debug_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
     archive_url = "https://buttondown.email/ainews/archive/"
-    today = datetime.date.today() - datetime.timedelta(days=2)
+    today = datetime.date.today() - datetime.timedelta(days=1)
     today = today.strftime('%B %d, %Y')
 
     web_content_check_agent = WebContentCheckAgent(task_id, archive_url, today)
@@ -31,10 +31,11 @@ if __name__ == '__main__':
         logging.warning(F"Not found news with date {today}")
         exit(0)
 
-    web_content_fetch_agent = WebContentFetchAgent(task_id, news_url, {'class': 'email-body-content'}, "output/debug.html")
-    html_clean_agent = HTMLCleanAgent(task_id, "output/debug.html", "output/debug_cleaned.html")
-    html2markdown_agent = HTML2MarkdownAgent(task_id, "output/debug_cleaned.html", "output/debug.md")
-    translation_agent = ContentTranslationAgent(task_id, "output/debug.md", "output/debug_translated.md")
+    print(f"task_id: {task_id}")
+    web_content_fetch_agent = WebContentFetchAgent(task_id, news_url, {'class': 'email-body-content'}, f"output/origin_{task_id}.html")
+    html_clean_agent = HTMLCleanAgent(task_id, f"output/origin_{task_id}.html", f"output/cleaned_{task_id}.html")
+    html2markdown_agent = HTML2MarkdownAgent(task_id, f"output/cleaned_{task_id}.html", f"output/cleaned_{task_id}.md")
+    translation_agent = ContentTranslationAgent(task_id, f"output/cleaned_{task_id}.md", f"output/translated_{task_id}.md")
 
     web_content_fetch_agent.execute()
     html_clean_agent.execute()
