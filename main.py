@@ -20,7 +20,8 @@ logger.addHandler(console_handler)
 
 
 if __name__ == '__main__':
-    task_id = "debug_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    # task_id = "debug_" + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    task_id = "debug_2024-04-30-17:11:27"
     archive_url = "https://buttondown.email/ainews/archive/"
     today = datetime.date.today() - datetime.timedelta(days=1)
     today = today.strftime('%B %d, %Y')
@@ -37,8 +38,8 @@ if __name__ == '__main__':
     html2markdown_agent = HTML2MarkdownAgent(task_id, f"output/cleaned_{task_id}.html", f"output/cleaned_{task_id}.md")
     translation_agent = ContentTranslationAgent(task_id, f"output/cleaned_{task_id}.md", f"output/translated_{task_id}.md")
 
-    web_content_fetch_agent.execute()
-    html_clean_agent.execute()
-    html2markdown_agent.execute()
+    # web_content_fetch_agent.execute()
+    # html_clean_agent.execute()
+    # html2markdown_agent.execute()
     translation_agent.execute()
     print("Done.")

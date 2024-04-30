@@ -1,7 +1,7 @@
 import logging
 import re
+import time
 
-from langchain_core.messages import HumanMessage, SystemMessage
 import llm
 
 
@@ -91,6 +91,7 @@ class ContentTranslationAgent:
             with open(self.output_path, 'a') as file:
                 file.write(translated + "\n")
             logging.info(f"[Content Translate Agent] Written to file.")
+            time.sleep(1)
 
     def parse_message(self, ai_message):
         match = re.search(self.translated_pattern, ai_message, re.DOTALL | re.MULTILINE)
