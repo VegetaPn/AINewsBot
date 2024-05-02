@@ -1,3 +1,4 @@
+import json
 import logging
 import re
 import time
@@ -7,9 +8,11 @@ import llm
 
 class ContentTranslationAgent:
     def __init__(self, task_id, input_file_path, output_file_path) -> None:
+        self.task_id = task_id
         self.input_file_path = input_file_path
         self.output_path = output_file_path
-        self.system_prompt = '''你是一位精通简体中文的专业翻译，曾参与《纽约时报》和《经济学人》中文版的翻译工作，因此对于新闻和时事文章的翻译有深入的理解。我希望你能帮我将以下英文新闻段落翻译成中文，风格与上述杂志的中文版相似。
+        self.system_prompt = "你是一位精通简体中文的专业翻译，曾参与《纽约时报》和《经济学人》中文版的翻译工作，因此对于新闻和时事文章的翻译有深入的理解。我希望你能帮我将以下英文新闻段落翻译成中文，风格与上述杂志的中文版相似。\\n规则：- 翻译时要准确传达新闻事实和背景。- 翻译时要准确传达新闻事实和背景。\\n- 即使意译也要保留原始段落格式，以及保留术语，例如LLM，FLAC，JPEG 等。保留公司缩写，例如 Microsoft, Amazon, OpenAI 等。\\n- 人名不翻译。\\n- 同时要保留引用的论文，例如 [20] 这样的引用。\\n- 对于 Figure 和 Table，翻译的同时保留原有格式，例如：“Figure 1: ”翻译为“图 1: ”，“Table 1: ”翻译为：“表 1: ”。\\n- 输入格式为 Markdown 格式，输出格式也必须保留原始 Markdown 格式\\n- 在翻译专业术语时，第一次出现时要在括号里面写上英文原文，例如：“生成式 AI (Generative AI)”，之后就可以只写中文了。\\n- 以下是常见的 AI 相关术语词汇对应表（English -> 中文）：\\n    * Transformer -> Transformer\\n    * Token -> Token\\n    * LLM/Large Language Model -> 大语言模型\\n    * Zero-shot -> 零样本\\n    * Few-shot -> 少样本\\n    * AI Agent -> AI 智能体\\n    * AGI -> 通用人工智能\\n    * Token -> Token\\n    * Stability.ai -> Stability.ai\\n    * LlaMa -> LlaMa\\n策略：\\n分三步进行翻译工作，并打印每步的结果：\\n1. 根据英文内容直译，保持原有格式，不要遗漏任何信息。\\n2. 根据第一步直译的结果，指出其中存在的具体问题，要准确描述，不宜笼统的表示，也不需要增加原文不存在的内容或格式，包括不仅限于：\\n    - 不符合中文表达习惯，明确指出不符合的地方。\\n    - 语句不通顺，指出位置，不需要给出修改意见，意译时修复。\\n    - 晦涩难懂，不易理解，可以尝试给出解释。\\n3. 根据第一步直译的结果和第二步指出的问题，重新进行意译，保证内容的原意的基础上，使其更易于理解，更符合中文的表达习惯，同时保持原有的格式不变。\\n返回格式如下，\'{xxx}\'表示占位符：\\n### 直译\\n{直译结果}\\n\\n***\\n\\n### 问题\\n{直译的具体问题列表}\\n\\n***\\n\\n### 意译\\n```\\n{意译结果}\\n```\\n\\n现在请按照上面的要求从第一行开始翻译以下内容为简体中文："
+        self.origin_system_prompt = '''你是一位精通简体中文的专业翻译，曾参与《纽约时报》和《经济学人》中文版的翻译工作，因此对于新闻和时事文章的翻译有深入的理解。我希望你能帮我将以下英文新闻段落翻译成中文，风格与上述杂志的中文版相似。
         规则：
         - 翻译时要准确传达新闻事实和背景。
         - 即使意译也要保留原始段落格式，以及保留术语，例如LLM，FLAC，JPEG 等。保留公司缩写，例如 Microsoft, Amazon, OpenAI 等。
@@ -67,21 +70,25 @@ class ContentTranslationAgent:
 
         paragraphs = content.split("\n\n\n")
         length = len(paragraphs)
-        logging.info(f"[Content Translate Agent] content length: {length}")
+        logging.info(f"[Content Translate Agent] content chunk size: {length}")
 
         round = 0
-        for paragraph in paragraphs:
-            round += 1
-            logging.info(f"[Content Translate Agent] Current round: {round}")
+        file_name = f"output/batch_request_{self.task_id}.jsonl"
+        with open(file_name, "w") as batch_request_file:
+            for paragraph in paragraphs:
+                round += 1
+                logging.info(f"[Content Translate Agent] Current round: {round}")
+                paragraph = json.dumps(paragraph)
+                line = '{"custom_id": "request-' + f'{round}' + '", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gpt-4-turbo", "messages": [{"role": "system", "content": "' + f'{self.system_prompt}' + '"}, {"role": "user", "content": ' + f'{paragraph}' + '}], "max_tokens": 4095}}'
+                batch_request_file.write(line)
+                batch_request_file.write("\n")
 
-            messages = [
-                {"role": "system", "content": self.system_prompt},
-                {"role": "user", "content": paragraph}
-            ]
-            logging.info(f"[Content Translate Agent] REQ: {messages}")
-            ai_message = llm.chat(messages)
-            logging.info(f"[Content Translate Agent] AI: {ai_message}")
+        batch_response = llm.batch_chat(file_name, "batch_translation")
+        if not batch_response:
+            logging.error(f"[Content Translate Agent] Output is None.")
+            return
 
+        for ai_message in batch_response:
             translated = self.parse_message(ai_message)
             if translated is None:
                 logging.error(f"[Content Translate Agent] Translated is None.")
@@ -91,7 +98,6 @@ class ContentTranslationAgent:
             with open(self.output_path, 'a') as file:
                 file.write(translated + "\n")
             logging.info(f"[Content Translate Agent] Written to file.")
-            time.sleep(1)
 
     def parse_message(self, ai_message):
         match = re.search(self.translated_pattern, ai_message, re.DOTALL | re.MULTILINE)
